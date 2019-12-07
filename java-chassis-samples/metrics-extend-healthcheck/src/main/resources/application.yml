@@ -1,3 +1,4 @@
+#
 ## ---------------------------------------------------------------------------
 ## Licensed to the Apache Software Foundation (ASF) under one or more
 ## contributor license agreements.  See the NOTICE file distributed with
@@ -15,32 +16,20 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
-APPLICATION_ID: trust-sample
+# spring boot serttings
+server:
+  port: 7777
+
+# all interconnected microservices must belong to an application wth the same ID
+APPLICATION_ID: metrics
+
 service_description:
-  name: store
+# name of the declaring microservice
+  name: metricsHealthCheckDemo
   version: 0.0.1
 servicecomb:
   service:
     registry:
       address: http://127.0.0.1:30100
   rest:
-    address: 0.0.0.0:8080
-  handler:
-    chain:
-      Consumer:
-        default: loadbalance,auth-consumer
-      Provider:
-        default: auth-provider
-  publicKey:
-    accessControl:
-      black:
-        list01:
-          category: property ## property, fixed value
-          propertyName: serviceName ## property name, e.g. serviceName, appId, environment, alias, version and so on, also support key in properties.
-          rule: hacker ## property value match expression. 
-##if propertyName is serviceName, only supports prefix match and postfix match and exactly match. e.g. hacker*, *hacker, hacker
-      white:
-        list02:
-          category: property
-          propertyName: serviceName
-          rule: cust*
+    address: 0.0.0.0:7777
